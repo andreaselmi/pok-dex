@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const PokeNextButton = ({ fetchNextData, text, disabled }) => {
+const PreviousNextButton = ({ fetchNextData, text, disabled }) => {
   const [showScroll, setShowScroll] = useState(false);
 
   const checkScrollTop = () => {
@@ -14,7 +14,10 @@ const PokeNextButton = ({ fetchNextData, text, disabled }) => {
   };
 
   const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     fetchNextData();
   };
 
@@ -22,18 +25,18 @@ const PokeNextButton = ({ fetchNextData, text, disabled }) => {
 
   return (
     <Button
-      disabled={disabled}
+      disablePreviousNextButtond={disabled}
       className="btn btn-next"
       variant="outline-secondary"
       onClick={scrollTop}
     >
-      {text}
+      {text}{" "}
     </Button>
   );
 };
 
-PokeNextButton.propTypes = {
+PreviousNextButton.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
-export default PokeNextButton;
+export default PreviousNextButton;

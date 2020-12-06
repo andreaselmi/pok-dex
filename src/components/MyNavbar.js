@@ -6,7 +6,7 @@ import pokeball from "../img/pokeball.svg";
 import glasses from "../img/glasses.svg";
 import search from "../img/search.svg";
 
-const PokeNavbar = () => {
+const MyNavbar = () => {
   return (
     <>
       <Styles>
@@ -70,4 +70,4 @@ const Styles = styled.div`
   }
 `;
 
-export default PokeNavbar;
+export default MyNavbar;

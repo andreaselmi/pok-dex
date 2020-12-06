@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PokeDisplayCard from "./PokeDisplayCard";
-import PokeNextButton from "./PokeNextButton";
+import PreviousNextButton from "./PreviousNextButton";
+import DisplayGrid from "./DisplayGrid";
 import styled from "styled-components";
 
 //bootstrap
@@ -12,11 +12,9 @@ import {
   FormGroup,
   FormControl,
   Button,
-  CardGroup,
-  Row,
 } from "react-bootstrap";
 
-const PokeSearchPage = () => {
+const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState();
   const [errorMessage, setErrorMessage] = useState("");
@@ -68,7 +66,7 @@ const PokeSearchPage = () => {
   //if there is no search, it displays the button
   const NextButton = result ? (
     result.results ? (
-      <PokeNextButton
+      <PreviousNextButton
         disabled={!result.next}
         text="Next"
         fetchNextData={() => fetchNextData(result.next)}
@@ -81,7 +79,7 @@ const PokeSearchPage = () => {
   );
   const PrevButton = result ? (
     result.results ? (
-      <PokeNextButton
+      <PreviousNextButton
         disabled={!result.previous}
         text="Previous"
         fetchNextData={() => fetchNextData(result.previous)}
@@ -105,8 +103,8 @@ const PokeSearchPage = () => {
               <FormControl
                 onChange={onChange}
                 value={query}
-                placeholder="Cerca il tuo pokemon preferito..."
-                aria-label="Cerca il tuo pokemon preferito..."
+                placeholder="Scrivi il nome del pokemon che vuoi catturare"
+                aria-label="Scrivi il nome del pokemon che vuoi catturare"
                 aria-describedby="basic-addon2"
               />
               <InputGroup.Append>
@@ -125,23 +123,13 @@ const PokeSearchPage = () => {
           {PrevButton}
           {NextButton}
         </Container>
-        <div>
-          {result ? (
-            result.results ? (
-              <CardGroup className="justify-content-around">
-                <Row>
-                  {result.results.map((pokemon) => (
-                    <PokeDisplayCard key={pokemon.name} pokemon={pokemon} />
-                  ))}
-                </Row>
-              </CardGroup>
-            ) : (
-              <PokeDisplayCard pokemon={result} />
-            )
-          ) : (
-            errorMessage
-          )}
-        </div>
+        <DisplayGrid
+          type="search-page"
+          fetchData={fetchData}
+          result={result}
+          errorMessage={errorMessage}
+        />
+
         <Container className="d-flex justify-content-between">
           {PrevButton}
           {NextButton}
@@ -164,4 +152,4 @@ const Styles = styled.div`
   }
 `;
 
-export default PokeSearchPage;
+export default SearchPage;

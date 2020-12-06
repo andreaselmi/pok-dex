@@ -1,8 +1,8 @@
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import PokeNavbar from "./components/PokeNavbar";
-import PokeSeenPage from "./components/PokeSeenPage";
-import PokeCaughtPage from "./components/PokeCaughtPage";
-import PokeSearchPage from "./components/PokeSearchPage";
+import MyNavbar from "./components/MyNavbar";
+import SeenPage from "./components/SeenPage";
+import CaughtPage from "./components/CaughtPage";
+import SearchPage from "./components/SearchPage";
 
 import PokemonContextProvider from "./context/PokemonContext";
 
@@ -11,20 +11,20 @@ function App() {
     <>
       <PokemonContextProvider>
         <Router>
-          <PokeNavbar />
+          <MyNavbar />
           <Switch>
             <Route exact path="/">
-              <PokeSearchPage />
-            </Route>{" "}
+              <SearchPage />
+            </Route>
             <Route path="/seen">
-              <PokeSeenPage />
-            </Route>{" "}
+              <SeenPage />
+            </Route>
             <Route path="/caught">
-              <PokeCaughtPage />
-            </Route>{" "}
-          </Switch>{" "}
-        </Router>{" "}
-      </PokemonContextProvider>{" "}
+              <CaughtPage />
+            </Route>
+          </Switch>
+        </Router>
+      </PokemonContextProvider>
     </>
   );
 }

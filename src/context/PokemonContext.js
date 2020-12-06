@@ -1,17 +1,13 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import AppReducer from "./AppReducer";
 
-// const initialState = {
-//   caught: localStorage.getItem("caught")
-//     ? JSON.parse(localStorage.getItem("caught"))
-//     : [],
-//   watched: localStorage.getItem("watched")
-//     ? JSON.parse(localStorage.getItem("watched"))
-//     : [],
-// };
 const initialState = {
-  caught: [],
-  watched: [],
+  caught: localStorage.getItem("caught")
+    ? JSON.parse(localStorage.getItem("caught"))
+    : [],
+  watched: localStorage.getItem("watched")
+    ? JSON.parse(localStorage.getItem("watched"))
+    : [],
 };
 
 export const PokemonContext = createContext(initialState);
@@ -19,19 +15,36 @@ export const PokemonContext = createContext(initialState);
 const PokemonContextProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  // useEffect(() => {
-  //   localStorage.setItem("caught", JSON.stringify(state.caught));
-  //   localStorage.setItem("watched", JSON.stringify(state.watched));
-  // }, [state]);
+  useEffect(() => {
+    localStorage.setItem("caught", JSON.stringify(state.caught));
+    localStorage.setItem("watched", JSON.stringify(state.watched));
+  }, [state]);
 
   // actions
   const addPokemonToCaught = (pokemon) => {
-    dispatch({ type: "ADD_POKEMON_TO_CAUGHT", payload: pokemon });
+    dispatch({
+      type: "ADD_POKEMON_TO_CAUGHT",
+      payload: pokemon,
+    });
+  };
+
+  const addPokemonToWatched = (pokemon) => {
+    dispatch({
+      type: "ADD_POKEMON_TO_WATCHED",
+      payload: pokemon,
+    });
   };
 
   return (
-    <PokemonContext.Provider value={{ addPokemonToCaught }}>
-      {props.children}
+    <PokemonContext.Provider
+      value={{
+        caught: state.caught,
+        watched: state.watched,
+        addPokemonToCaught,
+        addPokemonToWatched,
+      }}
+    >
+      {props.children}{" "}
     </PokemonContext.Provider>
   );
 };
