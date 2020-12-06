@@ -8,7 +8,7 @@ const DisplayGrid = ({
   fetchData,
   errorMessage,
   type,
-  watched,
+  seen,
   caught,
 }) => {
   return (
@@ -41,7 +41,7 @@ const DisplayGrid = ({
       {type === "seen-page" ? (
         <CardGroup className="justify-content-around">
           <Row>
-            {watched.map((pokemon) => (
+            {seen.map((pokemon) => (
               <DisplayCard type={type} pokemon={pokemon} key={pokemon.id} />
             ))}
           </Row>

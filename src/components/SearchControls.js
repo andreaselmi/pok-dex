@@ -18,8 +18,8 @@ const SearchControls = ({ onChange, query, handleSubmit }) => {
           <FormControl
             onChange={onChange}
             value={query}
-            placeholder="Scrivi il nome del pokemon che vuoi catturare"
-            aria-label="Scrivi il nome del pokemon che vuoi catturare"
+            placeholder="Enter a pokemon name..."
+            aria-label="Enter a pokemon name..."
             aria-describedby="basic-addon2"
           />
           <InputGroup.Append>

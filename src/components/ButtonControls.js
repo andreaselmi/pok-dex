@@ -6,22 +6,22 @@ import { Button } from "react-bootstrap";
 const ButtonControls = ({ type, fetchData, pokemon }) => {
   const {
     addPokemonToCaught,
-    addPokemonToWatched,
+    addPokemonToSeen,
     removePokemonFromCaught,
     caught,
-    watched,
+    seen,
   } = useContext(PokemonContext);
 
   let caughtPokemon = caught.find((poke) => poke.name === pokemon.name);
-  let watchedPokemon = watched.find((poke) => poke.name === pokemon.name);
+  let seenPokemon = seen.find((poke) => poke.name === pokemon.name);
 
   const disabledCaught = caughtPokemon ? true : false;
-  const disabledWatched = caughtPokemon ? true : watchedPokemon ? true : false;
+  const disabledSeen = caughtPokemon ? true : seenPokemon ? true : false;
 
   return (
     <div>
       {type === "search-page" ? (
-        <Button onClick={() => fetchData(pokemon.url)}>Inizia la lotta</Button>
+        <Button onClick={() => fetchData(pokemon.url)}>Start the fight</Button>
       ) : (
         ""
       )}
@@ -33,7 +33,7 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
               color: "red",
             }}
           >
-            Complimenti hai catturato questo pokemon!
+            Well done! You caught this pokemon
           </span>
         ) : (
           <>
@@ -41,13 +41,13 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
               disabled={disabledCaught}
               onClick={() => addPokemonToCaught(pokemon)}
             >
-              Catturato
+              Caught
             </Button>
             <Button
-              disabled={disabledWatched}
-              onClick={() => addPokemonToWatched(pokemon)}
+              disabled={disabledSeen}
+              onClick={() => addPokemonToSeen(pokemon)}
             >
-              Visto
+              Seen
             </Button>
           </>
         )
@@ -60,14 +60,16 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
           disabled={disabledCaught}
           onClick={() => addPokemonToCaught(pokemon)}
         >
-          Catturato
+          Catch it
         </Button>
       ) : (
         ""
       )}
 
       {type === "caught-page" ? (
-        <Button onClick={() => removePokemonFromCaught(pokemon)}>Libera</Button>
+        <Button onClick={() => removePokemonFromCaught(pokemon)}>
+          Free it
+        </Button>
       ) : (
         ""
       )}

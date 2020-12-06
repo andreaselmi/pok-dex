@@ -3,8 +3,8 @@ import { PokemonContext } from "../context/PokemonContext";
 import DisplayGrid from "./DisplayGrid";
 
 const SeenPage = () => {
-  const { watched } = useContext(PokemonContext);
-  return <DisplayGrid watched={watched} type="seen-page" />;
+  const { seen } = useContext(PokemonContext);
+  return <DisplayGrid seen={seen} type="seen-page" />;
 };
 
 export default SeenPage;

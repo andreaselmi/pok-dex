@@ -26,15 +26,15 @@ const MyNavbar = () => {
               <Nav className="ml-auto">
                 <Nav.Link as={Link} to="/">
                   <img src={search} alt="search icon" />
-                  <span>Cerca</span>
+                  <span>Search</span>
                 </Nav.Link>
                 <Nav.Link as={Link} to="/seen">
                   <img src={glasses} alt="glasses icon" />
-                  <span>Visti</span>
+                  <span>Seen</span>
                 </Nav.Link>
                 <Nav.Link as={Link} to="/caught">
                   <img src={pokeball} alt="pokeball icon" />
-                  <span>Catturati</span>
+                  <span>Caught</span>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>

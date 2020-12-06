@@ -5,8 +5,8 @@ const initialState = {
   caught: localStorage.getItem("caught")
     ? JSON.parse(localStorage.getItem("caught"))
     : [],
-  watched: localStorage.getItem("watched")
-    ? JSON.parse(localStorage.getItem("watched"))
+  seen: localStorage.getItem("seen")
+    ? JSON.parse(localStorage.getItem("seen"))
     : [],
 };
 
@@ -17,7 +17,7 @@ const PokemonContextProvider = (props) => {
 
   useEffect(() => {
     localStorage.setItem("caught", JSON.stringify(state.caught));
-    localStorage.setItem("watched", JSON.stringify(state.watched));
+    localStorage.setItem("seen", JSON.stringify(state.seen));
   }, [state]);
 
   // actions
@@ -28,9 +28,9 @@ const PokemonContextProvider = (props) => {
     });
   };
 
-  const addPokemonToWatched = (pokemon) => {
+  const addPokemonToSeen = (pokemon) => {
     dispatch({
-      type: "ADD_POKEMON_TO_WATCHED",
+      type: "ADD_POKEMON_TO_SEEN",
       payload: pokemon,
     });
   };
@@ -46,9 +46,9 @@ const PokemonContextProvider = (props) => {
     <PokemonContext.Provider
       value={{
         caught: state.caught,
-        watched: state.watched,
+        seen: state.seen,
         addPokemonToCaught,
-        addPokemonToWatched,
+        addPokemonToSeen,
         removePokemonFromCaught,
       }}
     >

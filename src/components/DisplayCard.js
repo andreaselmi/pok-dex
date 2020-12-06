@@ -19,7 +19,7 @@ const DisplayCard = ({ pokemon, fetchData, type }) => {
       };
 
   return (
-    <Col className="d-flex justify-content-center">
+    <Col className="d-flex justify-content-center mt-3">
       <Card
         style={{
           width: "18rem",
@@ -32,7 +32,9 @@ const DisplayCard = ({ pokemon, fetchData, type }) => {
         <Card.Body>
           <Card.Title> {_.get(pokemon, "name", noData)} </Card.Title>
           <Card.Text>
-            Cattura questo Pokemon per visualizzare le sue informazioni
+            {type === "caught-page"
+              ? pokemon.flavor_text_entries[0].flavor_text
+              : "Capture this pokemon to view its information"}
           </Card.Text>
           <ButtonControls fetchData={fetchData} pokemon={pokemon} type={type} />
         </Card.Body>

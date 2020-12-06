@@ -3,14 +3,14 @@ const Reducer = (state, action) => {
     case "ADD_POKEMON_TO_CAUGHT":
       return {
         ...state,
-        watched: state.watched.filter((pokemon) => pokemon.id !== action.payload.id),
+        seen: state.seen.filter((pokemon) => pokemon.id !== action.payload.id),
           caught: [action.payload, ...state.caught],
       };
 
-    case "ADD_POKEMON_TO_WATCHED":
+    case "ADD_POKEMON_TO_SEEN":
       return {
         ...state,
-        watched: [action.payload, ...state.watched],
+        seen: [action.payload, ...state.seen],
       };
     case "REMOVE_POKEMON_FROM_CAUGHT":
       return {
