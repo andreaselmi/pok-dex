@@ -4,21 +4,28 @@ const Reducer = (state, action) => {
       return {
         ...state,
         seen: state.seen.filter((pokemon) => pokemon.id !== action.payload.id),
-          caught: [action.payload, ...state.caught],
+        caught: [action.payload, ...state.caught],
       };
-
+    case "REMOVE_POKEMON_FROM_CAUGHT":
+      return {
+        ...state,
+        seen: [action.payload, ...state.seen],
+        caught: state.caught.filter(
+          (pokemon) => pokemon.id !== action.payload.id
+        ),
+      };
     case "ADD_POKEMON_TO_SEEN":
       return {
         ...state,
         seen: [action.payload, ...state.seen],
       };
-    case "REMOVE_POKEMON_FROM_CAUGHT":
+    case "REMOVE_POKEMON_FROM_SEEN":
       return {
         ...state,
-        caught: state.caught.filter((pokemon) => pokemon.id !== action.payload.id),
-      }
-      default:
-        return state;
+        seen: state.seen.filter((pokemon) => pokemon.id !== action.payload.id),
+      };
+    default:
+      return state;
   }
 };
 

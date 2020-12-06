@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { PokemonContext } from "../context/PokemonContext";
+import { Link } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 
@@ -10,6 +11,7 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
     removePokemonFromCaught,
     caught,
     seen,
+    removePokemonFromSeen,
   } = useContext(PokemonContext);
 
   let caughtPokemon = caught.find((poke) => poke.name === pokemon.name);
@@ -56,20 +58,26 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
       )}
 
       {type === "seen-page" ? (
-        <Button
-          disabled={disabledCaught}
-          onClick={() => addPokemonToCaught(pokemon)}
-        >
-          Catch it
-        </Button>
+        <>
+          <Button
+            disabled={disabledCaught}
+            onClick={() => addPokemonToCaught(pokemon)}
+          >
+            Catch it
+          </Button>
+          <Button onClick={() => removePokemonFromSeen(pokemon)}>Remove</Button>
+        </>
       ) : (
         ""
       )}
 
       {type === "caught-page" ? (
-        <Button onClick={() => removePokemonFromCaught(pokemon)}>
-          Free it
-        </Button>
+        <>
+          <Button onClick={() => removePokemonFromCaught(pokemon)}>
+            Free it
+          </Button>
+          <Link to={"/" + pokemon.id}>More Details</Link>
+        </>
       ) : (
         ""
       )}

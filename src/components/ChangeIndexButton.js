@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { PokemonContext } from "../context/PokemonContext";
 
-const ChangeIndexButton = ({ changeIndex, text, disabled }) => {
+const ChangeIndexButton = ({ text, disabled, url }) => {
   const [showScroll, setShowScroll] = useState(false);
+  const { fetchData } = useContext(PokemonContext);
 
   const checkScrollTop = () => {
     if (!showScroll && window.pageYOffset > 400) {
@@ -18,7 +20,7 @@ const ChangeIndexButton = ({ changeIndex, text, disabled }) => {
       top: 0,
       behavior: "smooth",
     });
-    changeIndex();
+    fetchData(url);
   };
 
   window.addEventListener("scroll", checkScrollTop);

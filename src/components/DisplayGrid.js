@@ -1,7 +1,7 @@
 import React from "react";
 import DisplayCard from "./DisplayCard";
 
-import { CardGroup, Row, Container } from "react-bootstrap";
+import { CardGroup, Row, Container, Button } from "react-bootstrap";
 
 const DisplayGrid = ({
   result,
@@ -10,6 +10,7 @@ const DisplayGrid = ({
   type,
   seen,
   caught,
+  url,
 }) => {
   return (
     <Container>
@@ -29,7 +30,10 @@ const DisplayGrid = ({
               </Row>
             </CardGroup>
           ) : (
-            <DisplayCard type="search-pokemon" pokemon={result} />
+            <>
+              <Button onClick={() => fetchData(url)}>Back</Button>
+              <DisplayCard type="search-pokemon" pokemon={result} />
+            </>
           )
         ) : (
           errorMessage

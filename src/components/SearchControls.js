@@ -24,7 +24,7 @@ const SearchControls = ({ onChange, query, handleSubmit }) => {
           />
           <InputGroup.Append>
             <Button type="submit" variant="outline-secondary" className="btn">
-              Button
+              Search
             </Button>
           </InputGroup.Append>
         </InputGroup>

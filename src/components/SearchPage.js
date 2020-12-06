@@ -1,47 +1,29 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useContext } from "react";
 import ChangeIndexButton from "./ChangeIndexButton";
 import SearchControls from "./SearchControls";
 import DisplayGrid from "./DisplayGrid";
 import styled from "styled-components";
+import { PokemonContext } from "../context/PokemonContext";
 
 //bootstrap
 import { Container } from "react-bootstrap";
 
 const SearchPage = () => {
-  const [query, setQuery] = useState("");
-  const [result, setResult] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const PokeApiUrl = "https://pokeapi.co/api/v2/pokemon-species/";
+  const {
+    fetchData,
+    result,
+    query,
+    setQuery,
+    errorMessage,
+    PokeApiUrl,
+    source,
+    url,
+  } = useContext(PokemonContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData(PokeApiUrl);
+    fetchData(PokeApiUrl, query);
   };
-
-  const fetchData = async (url) => {
-    try {
-      const response = await axios(url + query);
-      const data = response.data;
-      setResult(data);
-    } catch (err) {
-      console.log(err);
-      setResult("");
-      displayError(err);
-    }
-  };
-
-  const displayError = (err) => {
-    if (err.response) {
-      setErrorMessage("Inserisci un nome valido");
-    } else if (err.request) {
-      setErrorMessage("Impossibile completare la ricerca");
-    } else {
-      setErrorMessage("Aggiorna la pagina o riprova più tardi");
-    }
-  };
-
   const onChange = (e) => {
     setQuery(e.target.value.toLowerCase());
   };
@@ -49,6 +31,9 @@ const SearchPage = () => {
   //display all pokemon (20 max results)
   useEffect(() => {
     fetchData(PokeApiUrl);
+    return () => {
+      source.cancel();
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -58,7 +43,7 @@ const SearchPage = () => {
       <ChangeIndexButton
         disabled={!result.next}
         text="Next"
-        changeIndex={() => fetchData(result.next)}
+        url={result.next}
       />
     ) : (
       ""
@@ -71,7 +56,7 @@ const SearchPage = () => {
       <ChangeIndexButton
         disabled={!result.previous}
         text="Previous"
-        changeIndex={() => fetchData(result.previous)}
+        url={url}
       />
     ) : (
       ""
@@ -97,6 +82,7 @@ const SearchPage = () => {
           fetchData={fetchData}
           result={result}
           errorMessage={errorMessage}
+          url={PokeApiUrl}
         />
 
         <Container className="d-flex justify-content-between">

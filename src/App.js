@@ -3,6 +3,7 @@ import MyNavbar from "./components/MyNavbar";
 import SeenPage from "./components/SeenPage";
 import CaughtPage from "./components/CaughtPage";
 import SearchPage from "./components/SearchPage";
+import DetailsPage from "./components/DetailsPage";
 
 import PokemonContextProvider from "./context/PokemonContext";
 
@@ -13,15 +14,10 @@ function App() {
         <Router>
           <MyNavbar />
           <Switch>
-            <Route exact path="/">
-              <SearchPage />
-            </Route>
-            <Route path="/seen">
-              <SeenPage />
-            </Route>
-            <Route path="/caught">
-              <CaughtPage />
-            </Route>
+            <Route exact path="/" component={SearchPage} />
+            <Route path="/seen" component={SeenPage} />
+            <Route path="/caught" component={CaughtPage} />
+            <Route path="/:details_id" component={DetailsPage} />
           </Switch>
         </Router>
       </PokemonContextProvider>
