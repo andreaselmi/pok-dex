@@ -24,7 +24,7 @@ const MyNavbar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <Nav.Link as={Link} to="/" href="#home">
+                <Nav.Link as={Link} to="/">
                   <img src={search} alt="search icon" />
                   <span>Cerca</span>
                 </Nav.Link>
@@ -58,7 +58,9 @@ const Styles = styled.div`
     align-items: center;
     padding: 20px 0 0 !important;
     height: 80px;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
       color: white !important;
       background: #e3350e;
       transition: 0.5s;

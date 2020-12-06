@@ -7,6 +7,7 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
   const {
     addPokemonToCaught,
     addPokemonToWatched,
+    removePokemonFromCaught,
     caught,
     watched,
   } = useContext(PokemonContext);
@@ -54,7 +55,22 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
         ""
       )}
 
-      {type === "seen-pokemon" ? <span>prova a catturarlo</span> : ""}
+      {type === "seen-page" ? (
+        <Button
+          disabled={disabledCaught}
+          onClick={() => addPokemonToCaught(pokemon)}
+        >
+          Catturato
+        </Button>
+      ) : (
+        ""
+      )}
+
+      {type === "caught-page" ? (
+        <Button onClick={() => removePokemonFromCaught(pokemon)}>Libera</Button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

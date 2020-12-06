@@ -35,6 +35,13 @@ const PokemonContextProvider = (props) => {
     });
   };
 
+  const removePokemonFromCaught = (pokemon) => {
+    dispatch({
+      type: "REMOVE_POKEMON_FROM_CAUGHT",
+      payload: pokemon,
+    });
+  };
+
   return (
     <PokemonContext.Provider
       value={{
@@ -42,6 +49,7 @@ const PokemonContextProvider = (props) => {
         watched: state.watched,
         addPokemonToCaught,
         addPokemonToWatched,
+        removePokemonFromCaught,
       }}
     >
       {props.children}{" "}

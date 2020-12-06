@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PreviousNextButton from "./PreviousNextButton";
+import ChangeIndexButton from "./ChangeIndexButton";
+import SearchControls from "./SearchControls";
 import DisplayGrid from "./DisplayGrid";
 import styled from "styled-components";
 
 //bootstrap
-import {
-  Container,
-  InputGroup,
-  Form,
-  FormGroup,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -52,11 +46,6 @@ const SearchPage = () => {
     setQuery(e.target.value.toLowerCase());
   };
 
-  //display next 20 pokemon
-  const fetchNextData = (url) => {
-    fetchData(url);
-  };
-
   //display all pokemon (20 max results)
   useEffect(() => {
     fetchData(PokeApiUrl);
@@ -66,10 +55,10 @@ const SearchPage = () => {
   //if there is no search, it displays the button
   const NextButton = result ? (
     result.results ? (
-      <PreviousNextButton
+      <ChangeIndexButton
         disabled={!result.next}
         text="Next"
-        fetchNextData={() => fetchNextData(result.next)}
+        changeIndex={() => fetchData(result.next)}
       />
     ) : (
       ""
@@ -79,10 +68,10 @@ const SearchPage = () => {
   );
   const PrevButton = result ? (
     result.results ? (
-      <PreviousNextButton
+      <ChangeIndexButton
         disabled={!result.previous}
         text="Previous"
-        fetchNextData={() => fetchNextData(result.previous)}
+        changeIndex={() => fetchData(result.previous)}
       />
     ) : (
       ""
@@ -94,31 +83,11 @@ const SearchPage = () => {
   return (
     <Styles>
       <Container className="d-flex flex-column">
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <InputGroup
-              className="mt-3"
-              style={{ maxWidth: "800px", margin: "auto" }}
-            >
-              <FormControl
-                onChange={onChange}
-                value={query}
-                placeholder="Scrivi il nome del pokemon che vuoi catturare"
-                aria-label="Scrivi il nome del pokemon che vuoi catturare"
-                aria-describedby="basic-addon2"
-              />
-              <InputGroup.Append>
-                <Button
-                  type="submit"
-                  variant="outline-secondary"
-                  className="btn"
-                >
-                  Button
-                </Button>
-              </InputGroup.Append>
-            </InputGroup>
-          </FormGroup>
-        </Form>
+        <SearchControls
+          onChange={onChange}
+          handleSubmit={handleSubmit}
+          query={query}
+        />
         <Container className="d-flex justify-content-between">
           {PrevButton}
           {NextButton}

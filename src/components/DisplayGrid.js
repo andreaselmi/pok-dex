@@ -3,7 +3,14 @@ import DisplayCard from "./DisplayCard";
 
 import { CardGroup, Row, Container } from "react-bootstrap";
 
-const DisplayGrid = ({ result, fetchData, errorMessage, type, watched }) => {
+const DisplayGrid = ({
+  result,
+  fetchData,
+  errorMessage,
+  type,
+  watched,
+  caught,
+}) => {
   return (
     <Container>
       {type === "search-page" ? (
@@ -32,11 +39,23 @@ const DisplayGrid = ({ result, fetchData, errorMessage, type, watched }) => {
       )}
 
       {type === "seen-page" ? (
+        <CardGroup className="justify-content-around">
+          <Row>
+            {watched.map((pokemon) => (
+              <DisplayCard type={type} pokemon={pokemon} key={pokemon.id} />
+            ))}
+          </Row>
+        </CardGroup>
+      ) : (
+        ""
+      )}
+
+      {type === "caught-page" ? (
         <Container>
           <CardGroup className="justify-content-around">
             <Row>
-              {watched.map((pokemon) => (
-                <DisplayCard pokemon={pokemon} key={pokemon.id} />
+              {caught.map((pokemon) => (
+                <DisplayCard type={type} pokemon={pokemon} key={pokemon.id} />
               ))}
             </Row>
           </CardGroup>

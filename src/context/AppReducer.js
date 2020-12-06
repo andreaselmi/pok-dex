@@ -3,7 +3,7 @@ const Reducer = (state, action) => {
     case "ADD_POKEMON_TO_CAUGHT":
       return {
         ...state,
-        watched: state.caught.filter((pokemon) => pokemon.name === action.payload.name),
+        watched: state.watched.filter((pokemon) => pokemon.id !== action.payload.id),
           caught: [action.payload, ...state.caught],
       };
 
@@ -12,8 +12,13 @@ const Reducer = (state, action) => {
         ...state,
         watched: [action.payload, ...state.watched],
       };
-    default:
-      return state;
+    case "REMOVE_POKEMON_FROM_CAUGHT":
+      return {
+        ...state,
+        caught: state.caught.filter((pokemon) => pokemon.id !== action.payload.id),
+      }
+      default:
+        return state;
   }
 };
 

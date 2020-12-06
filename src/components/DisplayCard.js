@@ -19,10 +19,10 @@ const DisplayCard = ({ pokemon, fetchData, type }) => {
       };
 
   return (
-    <Col sm={6} md={4} lg={3} className="d-flex">
+    <Col className="d-flex justify-content-center">
       <Card
         style={{
-          width: "100%",
+          width: "18rem",
         }}
       >
         <Card.Img

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const PreviousNextButton = ({ fetchNextData, text, disabled }) => {
+const ChangeIndexButton = ({ changeIndex, text, disabled }) => {
   const [showScroll, setShowScroll] = useState(false);
 
   const checkScrollTop = () => {
@@ -18,25 +18,25 @@ const PreviousNextButton = ({ fetchNextData, text, disabled }) => {
       top: 0,
       behavior: "smooth",
     });
-    fetchNextData();
+    changeIndex();
   };
 
   window.addEventListener("scroll", checkScrollTop);
 
   return (
     <Button
-      disablePreviousNextButtond={disabled}
+      disabled={disabled}
       className="btn btn-next"
       variant="outline-secondary"
       onClick={scrollTop}
     >
-      {text}{" "}
+      {text}
     </Button>
   );
 };
 
-PreviousNextButton.propTypes = {
+ChangeIndexButton.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
-export default PreviousNextButton;
+export default ChangeIndexButton;
