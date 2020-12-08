@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react";
 import ChangeIndexButton from "./ChangeIndexButton";
 import SearchControls from "./SearchControls";
 import DisplayGrid from "./DisplayGrid";
-import styled from "styled-components";
 import { PokemonContext } from "../context/PokemonContext";
 
 //bootstrap
@@ -17,7 +16,6 @@ const SearchPage = () => {
     errorMessage,
     PokeApiUrl,
     source,
-    url,
   } = useContext(PokemonContext);
 
   const handleSubmit = (e) => {
@@ -56,7 +54,7 @@ const SearchPage = () => {
       <ChangeIndexButton
         disabled={!result.previous}
         text="Previous"
-        url={url}
+        url={result.previous}
       />
     ) : (
       ""
@@ -66,45 +64,29 @@ const SearchPage = () => {
   );
 
   return (
-    <Styles>
-      <Container className="d-flex flex-column">
-        <SearchControls
-          onChange={onChange}
-          handleSubmit={handleSubmit}
-          query={query}
-        />
-        <Container className="d-flex justify-content-between">
-          {PrevButton}
-          {NextButton}
-        </Container>
-        <DisplayGrid
-          type="search-page"
-          fetchData={fetchData}
-          result={result}
-          errorMessage={errorMessage}
-          url={PokeApiUrl}
-        />
-
-        <Container className="d-flex justify-content-between">
-          {PrevButton}
-          {NextButton}
-        </Container>
-      </Container>
-    </Styles>
+    <Container className="d-flex flex-column">
+      <SearchControls
+        onChange={onChange}
+        handleSubmit={handleSubmit}
+        query={query}
+      />{" "}
+      <Container className="d-flex justify-content-between">
+        {" "}
+        {PrevButton} {NextButton}{" "}
+      </Container>{" "}
+      <DisplayGrid
+        type="search-page"
+        fetchData={fetchData}
+        result={result}
+        errorMessage={errorMessage}
+        url={PokeApiUrl}
+      />
+      <Container className="d-flex justify-content-between">
+        {" "}
+        {PrevButton} {NextButton}{" "}
+      </Container>{" "}
+    </Container>
   );
 };
-
-//styles
-const Styles = styled.div`
-  .btn {
-    &:hover {
-      background-color: #e3350e !important;
-    }
-  }
-  .btn-next {
-    width: 100px;
-    margin: 10px;
-  }
-`;
 
 export default SearchPage;

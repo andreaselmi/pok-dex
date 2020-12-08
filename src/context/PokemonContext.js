@@ -19,6 +19,7 @@ const PokemonContextProvider = (props) => {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState();
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const PokeApiUrl = "https://pokeapi.co/api/v2/pokemon-species/";
 
@@ -27,8 +28,11 @@ const PokemonContextProvider = (props) => {
 
   //fetchdata and errorhandling
   const fetchData = async (url, query = "") => {
+    setIsLoading(true);
     try {
-      const response = await axios(url + query, { cancelToken: source.token });
+      const response = await axios(url + query, {
+        cancelToken: source.token,
+      });
       const data = response.data;
       setResult(data);
     } catch (err) {
@@ -40,6 +44,7 @@ const PokemonContextProvider = (props) => {
         displayError(err);
       }
     }
+    setIsLoading(false);
   };
 
   const displayError = (err) => {
@@ -105,6 +110,7 @@ const PokemonContextProvider = (props) => {
         PokeApiUrl,
         source,
         removePokemonFromSeen,
+        isLoading,
       }}
     >
       {props.children}{" "}

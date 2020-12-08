@@ -1,11 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import { PokemonContext } from "../context/PokemonContext";
 import _ from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 import { Container, Row, Col, Image, Card } from "react-bootstrap";
+import styled from "styled-components";
+import cardImg from "../img/cardBackground.png";
 
 const DetailsPage = (props) => {
-  const { fetchData, source, PokeApiUrl, result } = useContext(PokemonContext);
+  const { fetchData, source, result } = useContext(PokemonContext);
   let id = props.match.params.details_id;
 
   const noData = "Date not available";
@@ -15,7 +18,7 @@ const DetailsPage = (props) => {
 
   //display all pokemon (20 max results)
   useEffect(() => {
-    fetchData(PokeApiUrl, id);
+    fetchData("https://pokeapi.co/api/v2/pokemon/", id);
     return () => {
       source.cancel();
     };
@@ -23,49 +26,154 @@ const DetailsPage = (props) => {
   }, []);
 
   return (
-    <Container>
-      <Row>
-        <Col sm={4}>
-          <Image width="200px" src={srcImage} rounded />
-        </Col>
-        <Col sm={8}>
-          {result ? (
-            <>
-              <Card>
-                <Card.Header>
-                  {_.get(result, "name", noData).toUpperCase()}
-                </Card.Header>
-                <Card.Body>
-                  <Card.Text>
-                    {_.get(
-                      result,
-                      "flavor_text_entries[0].flavor_text",
-                      noData
-                    )}
-                  </Card.Text>
+    <Styles>
+      <Container className="d-flex justify-content-center mt-5 ">
+        <Row className="container_row">
+          <Col className="col" sm={12} style={{ textAlign: "center" }}>
+            <Image width="200px" src={srcImage} />
+            <Card className="container_card">
+              <Card.Body>
+                <h4>
+                  {_.get(result, "name", noData).toUpperCase()} - ID{" "}
+                  {_.get(result, "id", noData)}
+                </h4>
+                <Container
+                  className="container__details stats"
+                  style={{ background: "#30A7D7" }}
+                >
                   <ul>
-                    <li>base happiness: {result.base_happiness}</li>
-                    <li>capture rate: {result.capture_rate}</li>
-                    <li>Color: {result.color.name}</li>
-                    <li>
-                      Evolves from:
-                      {" " +
-                        JSON.stringify(
-                          _.get(result, "evolves_from_species.name", noData)
-                        ).toUpperCase()}
-                    </li>
-                    <li>Shape: {JSON.stringify(result.shape.name)}</li>
+                    {result
+                      ? result.stats
+                        ? result.stats.map((stat) => (
+                            <li key={uuidv4()}>
+                              {_.get(
+                                stat,
+                                "stat.name",
+                                "Stat name not avaiable"
+                              )}{" "}
+                              - {_.get(stat, "base_stat", "Stat not avaiable")}
+                            </li>
+                          ))
+                        : ""
+                      : ""}
                   </ul>
-                </Card.Body>
-              </Card>
-            </>
-          ) : (
-            ""
-          )}
-        </Col>
-      </Row>
-    </Container>
+                </Container>
+                <Container className="container__details types">
+                  {result ? (
+                    result.types ? (
+                      <Row>
+                        {result.types.map((type) => (
+                          <Col key={uuidv4()} style={backgroundType(type)}>
+                            {_.get(type, "type.name", noData)}
+                          </Col>
+                        ))}
+                      </Row>
+                    ) : (
+                      noData
+                    )
+                  ) : (
+                    noData
+                  )}
+                </Container>
+                {/* <Container className="container__details">
+                  <p>
+                    Height: {_.get(result, "height", noData)} - Weight:{" "}
+                    {_.get(result, "weight", noData)} - Base experience:{" "}
+                    {_.get(result, "base_experience", noData)}
+                  </p>
+                </Container> */}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </Styles>
   );
+};
+
+const Styles = styled.div`
+    .container_row {
+      border-radius: 5px;
+      background-image: url(${cardImg});
+      background-position: center;
+      background-size: cover;
+      max-width: 36rem;
+      color:white;
+      box-shadow: 10px 10px 15px -4px rgba(0, 0, 0, 0.75);
+
+      .card{
+        background: transparent;
+
+      }
+
+      .card-body{
+        padding-top: 0;
+      }
+
+      .container__details{
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        text-align: left;
+        .row{
+          display: flex;
+          justify-content: space-between;
+        }
+        p{
+          margin: 0;
+        }
+        .col{
+          border-radius: 5px;
+          max-width: 49%;
+        }
+      }
+      .stats li {
+        font-size: 1.3rem;
+        text-transform: capitalize;
+      }
+
+    ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+
+      li{
+        min-width: 50%;
+
+      }
+    }
+  }
+}
+`;
+
+const backgroundType = (type) => {
+  const typeColors = {
+    normal: "#A8A878",
+    fairy: "#F0B6BC",
+    fire: "#F08030",
+    water: "#6890F0",
+    grass: "#78C850",
+    electric: "#F8D030",
+    ice: "#98D8D8",
+    fighting: "#C03028",
+    poison: "#A040A0",
+    ground: "#E0C068",
+    flying: "#A890F0",
+    psychic: "#F85888",
+    bug: "#A8B820",
+    rock: "#B8A038",
+    dark: "#705849",
+    dragon: "#7038F8",
+    steel: "#B8B8D0",
+    fairy: "#F0B6BC",
+  };
+
+  if (type.type.name in typeColors) {
+    return { backgroundColor: typeColors[type.type.name] };
+  } else {
+    return { backgroundColor: "#FA6555" };
+  }
 };
 
 export default DetailsPage;

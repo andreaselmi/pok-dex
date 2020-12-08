@@ -14,11 +14,11 @@ const DisplayGrid = ({
 }) => {
   return (
     <Container>
-      {type === "search-page" ? (
-        result ? (
-          result.results ? (
-            <CardGroup className="justify-content-around">
-              <Row>
+      <Row className="d-flex flex-column">
+        {type === "search-page" ? (
+          result ? (
+            result.results ? (
+              <CardGroup className="justify-content-around">
                 {result.results.map((pokemon) => (
                   <DisplayCard
                     type={type}
@@ -27,46 +27,48 @@ const DisplayGrid = ({
                     pokemon={pokemon}
                   />
                 ))}
-              </Row>
-            </CardGroup>
+              </CardGroup>
+            ) : (
+              <>
+                <Button
+                  style={{ maxWidth: "5rem" }}
+                  variant="outline-secondary"
+                  onClick={() => fetchData(url)}
+                >
+                  Back
+                </Button>
+                <DisplayCard type="search-pokemon" url={url} pokemon={result} />
+              </>
+            )
           ) : (
-            <>
-              <Button onClick={() => fetchData(url)}>Back</Button>
-              <DisplayCard type="search-pokemon" pokemon={result} />
-            </>
+            errorMessage
           )
         ) : (
-          errorMessage
-        )
-      ) : (
-        ""
-      )}
+          ""
+        )}
 
-      {type === "seen-page" ? (
-        <CardGroup className="justify-content-around">
-          <Row>
+        {type === "seen-page" ? (
+          <CardGroup className="justify-content-around">
             {seen.map((pokemon) => (
               <DisplayCard type={type} pokemon={pokemon} key={pokemon.id} />
             ))}
-          </Row>
-        </CardGroup>
-      ) : (
-        ""
-      )}
+          </CardGroup>
+        ) : (
+          ""
+        )}
 
-      {type === "caught-page" ? (
-        <Container>
-          <CardGroup className="justify-content-around">
-            <Row>
+        {type === "caught-page" ? (
+          <Container>
+            <CardGroup className="justify-content-around">
               {caught.map((pokemon) => (
                 <DisplayCard type={type} pokemon={pokemon} key={pokemon.id} />
               ))}
-            </Row>
-          </CardGroup>
-        </Container>
-      ) : (
-        ""
-      )}
+            </CardGroup>
+          </Container>
+        ) : (
+          ""
+        )}
+      </Row>
     </Container>
   );
 };

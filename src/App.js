@@ -4,6 +4,7 @@ import SeenPage from "./components/SeenPage";
 import CaughtPage from "./components/CaughtPage";
 import SearchPage from "./components/SearchPage";
 import DetailsPage from "./components/DetailsPage";
+import MyFooter from "./components/MyFooter";
 
 import PokemonContextProvider from "./context/PokemonContext";
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/:details_id" component={DetailsPage} />
           </Switch>
         </Router>
+        <MyFooter />
       </PokemonContextProvider>
     </>
   );

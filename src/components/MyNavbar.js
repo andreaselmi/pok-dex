@@ -10,14 +10,14 @@ const MyNavbar = () => {
   return (
     <>
       <Styles>
-        <Container>
-          <Navbar
-            collapseOnSelect
-            expand="md"
-            className="py-0"
-            bg="light"
-            variant="light"
-          >
+        <Navbar
+          collapseOnSelect
+          expand="md"
+          className="py-0"
+          bg="light"
+          variant="light"
+        >
+          <Container>
             <Navbar.Brand as={Link} to="/">
               Pokédex
             </Navbar.Brand>
@@ -38,16 +38,19 @@ const MyNavbar = () => {
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
-          </Navbar>
-        </Container>
+          </Container>
+        </Navbar>
       </Styles>
     </>
   );
 };
 
 const Styles = styled.div`
+  .navbar {
+    background-color: #fa6555 !important;
+  }
   .navbar-brand {
-    font-family: "Rajdhani", sans-serif;
+    font-family: "PressStart2P", sans-serif;
     font-weight: bold;
     font-size: 2rem;
   }
