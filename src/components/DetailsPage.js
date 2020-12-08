@@ -141,6 +141,10 @@ const Styles = styled.div`
       li{
         min-width: 50%;
 
+        @media only screen and (max-width: 500px) {
+    min-width: 100%;
+  }
+}
       }
     }
   }
@@ -166,7 +170,6 @@ const backgroundType = (type) => {
     dark: "#705849",
     dragon: "#7038F8",
     steel: "#B8B8D0",
-    fairy: "#F0B6BC",
   };
 
   if (type.type.name in typeColors) {

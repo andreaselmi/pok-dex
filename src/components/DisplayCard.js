@@ -25,7 +25,7 @@ const DisplayCard = ({ pokemon, fetchData, type, url }) => {
 
   return (
     <Styles>
-      <Col className="d-flex justify-content-center mt-3">
+      <Col className="d-flex justify-content-center my-3 p-0">
         <Card className="mycard">
           <Card.Img variant="top" src={checkUrlImg()} />
           <Card.Body>

@@ -74,6 +74,7 @@ const SearchPage = () => {
         {" "}
         {PrevButton} {NextButton}{" "}
       </Container>{" "}
+      {errorMessage}
       <DisplayGrid
         type="search-page"
         fetchData={fetchData}

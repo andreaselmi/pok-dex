@@ -41,22 +41,22 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
             Well done! You caught this pokemon
           </span>
         ) : (
-          <>
+          <div className="container__search">
             <Button
               variant="poke"
               disabled={disabledCaught}
               onClick={() => addPokemonToCaught(pokemon)}
             >
-              Caught
+              Catch it!
             </Button>
             <Button
               variant="poke"
               disabled={disabledSeen}
               onClick={() => addPokemonToSeen(pokemon)}
             >
-              Seen
+              Add to Seen
             </Button>
-          </>
+          </div>
         )
       ) : (
         ""
@@ -69,7 +69,7 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
             disabled={disabledCaught}
             onClick={() => addPokemonToCaught(pokemon)}
           >
-            Catch it
+            Catch it!
           </Button>
           <Button variant="poke" onClick={() => removePokemonFromSeen(pokemon)}>
             Remove
@@ -99,7 +99,8 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
 };
 
 const Styles = styled.div`
-  .container__seen {
+  .container__seen,
+  .container__search {
     display: flex;
     justify-content: space-between;
   }

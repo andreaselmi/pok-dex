@@ -28,6 +28,7 @@ const PokemonContextProvider = (props) => {
 
   //fetchdata and errorhandling
   const fetchData = async (url, query = "") => {
+    setErrorMessage("");
     setIsLoading(true);
     try {
       const response = await axios(url + query, {
