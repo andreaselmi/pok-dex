@@ -5,10 +5,9 @@ import ButtonControls from "./ButtonControls";
 //bootstrap, styled and default image
 import { Card, Col } from "react-bootstrap";
 import styled from "styled-components";
-import pokeballIcon from "../img/pokeball-2.png";
+import fallbackImg from "../img/pokeball-2.png";
 import cardImg from "../img/cardBackground.png";
 
-//default parameter
 const urlImg =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
@@ -19,7 +18,7 @@ const DisplayCard = ({ pokemon, fetchData, type, url }) => {
     } else if (pokemon.url) {
       return urlImg + pokemon.url.slice(41, pokemon.url.length - 1) + ".png";
     } else {
-      return pokeballIcon;
+      return fallbackImg;
     }
   };
 
@@ -55,6 +54,7 @@ const DisplayCard = ({ pokemon, fetchData, type, url }) => {
   );
 };
 
+//style
 const Styles = styled.div`
   .mycard {
     box-shadow: 10px 10px 15px -4px rgba(0, 0, 0, 0.75);

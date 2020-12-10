@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { PokemonContext } from "../context/PokemonContext";
 import { Link } from "react-router-dom";
 
+//bootstrap and css
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -15,9 +16,11 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
     removePokemonFromSeen,
   } = useContext(PokemonContext);
 
+  //check if seen or caught
   let caughtPokemon = caught.find((poke) => poke.name === pokemon.name);
   let seenPokemon = seen.find((poke) => poke.name === pokemon.name);
 
+  //button disabled if seen or caught
   const disabledCaught = caughtPokemon ? true : false;
   const disabledSeen = caughtPokemon ? true : seenPokemon ? true : false;
 
@@ -98,6 +101,7 @@ const ButtonControls = ({ type, fetchData, pokemon }) => {
   );
 };
 
+//style
 const Styles = styled.div`
   .container__seen,
   .container__search {

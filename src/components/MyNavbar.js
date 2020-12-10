@@ -59,6 +59,7 @@ const Styles = styled.div`
   }
   .lds-dual-ring {
     display: inline-block;
+    margin-right: auto;
   }
   .lds-dual-ring:after {
     content: " ";

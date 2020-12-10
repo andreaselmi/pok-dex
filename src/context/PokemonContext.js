@@ -14,8 +14,10 @@ const initialState = {
 export const PokemonContext = createContext(initialState);
 
 const PokemonContextProvider = (props) => {
+  //reducer
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  //global state
   const [query, setQuery] = useState("");
   const [result, setResult] = useState();
   const [errorMessage, setErrorMessage] = useState("");

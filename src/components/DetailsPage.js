@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Container, Row, Col, Image, Card } from "react-bootstrap";
 import styled from "styled-components";
 import cardImg from "../img/cardBackground.png";
+import fallbackImg from "../img/pokeball-2.png";
 
 const DetailsPage = (props) => {
   const { fetchData, source, result } = useContext(PokemonContext);
@@ -14,7 +15,7 @@ const DetailsPage = (props) => {
   const noData = "Date not available";
   const srcImage = result
     ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-    : "";
+    : fallbackImg;
 
   //display all pokemon (20 max results)
   useEffect(() => {
