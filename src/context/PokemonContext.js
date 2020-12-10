@@ -50,11 +50,11 @@ const PokemonContextProvider = (props) => {
 
   const displayError = (err) => {
     if (err.response) {
-      setErrorMessage("Inserisci un nome valido");
+      setErrorMessage("Enter a valid name");
     } else if (err.request) {
-      setErrorMessage("Impossibile completare la ricerca");
+      setErrorMessage("Unable to complete the request");
     } else {
-      setErrorMessage("Aggiorna la pagina o riprova più tardi");
+      setErrorMessage("Refresh the page or try again later");
     }
   };
 

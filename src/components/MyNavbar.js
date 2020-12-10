@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { PokemonContext } from "../context/PokemonContext";
 import styled from "styled-components";
 import pokeball from "../img/pokeball.svg";
 import glasses from "../img/glasses.svg";
 import search from "../img/search.svg";
 
 const MyNavbar = () => {
+  const { isLoading } = useContext(PokemonContext);
   return (
     <>
       <Styles>
@@ -21,6 +23,7 @@ const MyNavbar = () => {
             <Navbar.Brand as={Link} to="/">
               Pokédex
             </Navbar.Brand>
+            {isLoading ? <span className="lds-dual-ring"></span> : ""}
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
@@ -53,6 +56,28 @@ const Styles = styled.div`
     font-family: "PressStart2P", sans-serif;
     font-weight: bold;
     font-size: 2rem;
+  }
+  .lds-dual-ring {
+    display: inline-block;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   .nav-link {
     min-width: 5rem;

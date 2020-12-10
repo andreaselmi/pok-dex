@@ -75,13 +75,6 @@ const DetailsPage = (props) => {
                     noData
                   )}
                 </Container>
-                {/* <Container className="container__details">
-                  <p>
-                    Height: {_.get(result, "height", noData)} - Weight:{" "}
-                    {_.get(result, "weight", noData)} - Base experience:{" "}
-                    {_.get(result, "base_experience", noData)}
-                  </p>
-                </Container> */}
               </Card.Body>
             </Card>
           </Col>
@@ -92,45 +85,44 @@ const DetailsPage = (props) => {
 };
 
 const Styles = styled.div`
-    .container_row {
+  .container_row {
+    border-radius: 5px;
+    background-image: url(${cardImg});
+    background-position: center;
+    background-size: cover;
+    max-width: 36rem;
+    color: white;
+    box-shadow: 10px 10px 15px -4px rgba(0, 0, 0, 0.75);
+
+    .card {
+      background: transparent;
+    }
+
+    .card-body {
+      padding-top: 0;
+    }
+
+    .container__details {
+      padding: 10px 15px;
+      margin-bottom: 10px;
       border-radius: 5px;
-      background-image: url(${cardImg});
-      background-position: center;
-      background-size: cover;
-      max-width: 36rem;
-      color:white;
-      box-shadow: 10px 10px 15px -4px rgba(0, 0, 0, 0.75);
-
-      .card{
-        background: transparent;
-
+      text-align: left;
+      .row {
+        display: flex;
+        justify-content: space-between;
       }
-
-      .card-body{
-        padding-top: 0;
+      p {
+        margin: 0;
       }
-
-      .container__details{
-        padding: 10px 15px;
-        margin-bottom: 10px;
+      .col {
         border-radius: 5px;
-        text-align: left;
-        .row{
-          display: flex;
-          justify-content: space-between;
-        }
-        p{
-          margin: 0;
-        }
-        .col{
-          border-radius: 5px;
-          max-width: 49%;
-        }
+        max-width: 49%;
       }
-      .stats li {
-        font-size: 1.3rem;
-        text-transform: capitalize;
-      }
+    }
+    .stats li {
+      font-size: 1.3rem;
+      text-transform: capitalize;
+    }
 
     ul {
       padding: 0;
@@ -138,17 +130,15 @@ const Styles = styled.div`
       display: flex;
       flex-wrap: wrap;
 
-      li{
+      li {
         min-width: 50%;
 
         @media only screen and (max-width: 500px) {
-    min-width: 100%;
-  }
-}
+          min-width: 100%;
+        }
       }
     }
   }
-}
 `;
 
 const backgroundType = (type) => {
