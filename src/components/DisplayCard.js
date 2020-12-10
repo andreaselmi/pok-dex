@@ -30,14 +30,14 @@ const DisplayCard = ({ pokemon, fetchData, type, url }) => {
           <Card.Img variant="top" src={checkUrlImg()} />
           <Card.Body>
             <Card.Title>
-              {_.get(pokemon, "name", "Pokemon's name not avaiable")}
+              {_.get(pokemon, "name", "Pokemon's name not available")}
             </Card.Title>
             <Card.Text>
               {type === "caught-page"
                 ? _.get(
                     pokemon,
                     "flavor_text_entries[0].flavor_text",
-                    "Description not avaiable"
+                    "Description not available"
                   )
                 : "Capture this pokemon to view its information"}
             </Card.Text>
